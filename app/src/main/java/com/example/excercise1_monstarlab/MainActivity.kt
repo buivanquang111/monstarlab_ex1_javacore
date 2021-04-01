@@ -131,30 +131,26 @@ class MainActivity : AppCompatActivity() {
                     mutableList.set(i,student)
                 }
             }
+            clearText()
             display(mutableList)
         }
     }
 
     fun deleteStudent(mutableList: MutableList<Student>){
-        /*Toast.makeText(this,edSDT.text.toString(),Toast.LENGTH_LONG).show()
         if(edSDT.text.toString().isEmpty()){
             Toast.makeText(this,"bạn chưa nhập số điện thoại muốn xóa",Toast.LENGTH_LONG).show()
             return
-        }*/
+        }
 
-            for (i in 0 until mutableList.size){
-                val phone: String =edSDT.text.toString()
-                if (mutableList[i].phone == phone){
-                    mutableList.removeAt(i)
+        for (i in 0 until mutableList.size){
+            val phone: String =edSDT.text.toString()
+            if (mutableList[i].phone == phone){
+                mutableList.removeAt(i)
+                    break
                 }
             }
-
-
-            display(mutableList)
-
-
-
-
+        edSDT.text.clear()
+        display(mutableList)
     }
 
     fun addStudent(mutableList: MutableList<Student>){
@@ -167,10 +163,7 @@ class MainActivity : AppCompatActivity() {
         }else if(edNamSinh.text.isEmpty()){
             Toast.makeText(this@MainActivity,"bạn chưa nhập số năm sinh",Toast.LENGTH_SHORT).show()
         }else{
-
-
             if (mutableList.size > 0) {
-
                 for (i in 0 until mutableList.size) {
                     if (mutableList[i].phone == edSDT.text.toString()) {
                         Toast.makeText(this@MainActivity, "số dt ton tại", Toast.LENGTH_SHORT).show()
