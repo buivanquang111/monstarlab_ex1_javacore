@@ -125,7 +125,7 @@
                     android:layout_height="wrap_content"/>
                 <Button
                     android:id="@+id/btnSapXep"
-                    android:text="Sắp xếp"
+                    android:text="Sắp xếp sdt"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_width="100dp"
@@ -136,6 +136,23 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_width="100dp"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+                <Button
+                    android:id="@+id/btnSapXepTen"
+                    android:text="Sắp xếp theo tên"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"/>
+                <Button
+                    android:id="@+id/btnSapXepNamsinh"
+                    android:text="Sắp xếp theo tuổi"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
 

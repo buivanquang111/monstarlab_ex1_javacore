@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.text.isDigitsOnly
 import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.activity_main.*
@@ -53,10 +54,16 @@ class MainActivity : AppCompatActivity() {
             filterStudent(mutableList)
         }
         btnSapXep.setOnClickListener {
-            sortStudent(mutableList)
+            sortStudentWithPhone(mutableList)
         }
         imgTimKiem.setOnClickListener {
             searchStudent(mutableList)
+        }
+        btnSapXepNamsinh.setOnClickListener {
+            sortStudent(mutableList)
+        }
+        btnSapXepTen.setOnClickListener {
+            sortStudentWithName(mutableList)
         }
 
     }
@@ -64,14 +71,14 @@ class MainActivity : AppCompatActivity() {
     fun searchStudent(mutableList: MutableList<Student>){
         val list: ArrayList<Student> = arrayListOf()
         for (i in 0 until mutableList.size){
-            /*if (mutableList[i].name.contains(edTimKiem.text.toString().toLowerCase())
-                || mutableList[i].specializ.contains(edChuyenNganh.text.toString().toLowerCase())
-                || mutableList[i].system.contains(spHe.selectedItem.toString()) ){
-                list.add(mutableList[i])
-            }*/
-            if(mutableList[i].name.contains(edTimKiem.text.toString().toLowerCase())){
+            if (mutableList[i].name.contains(edTimKiem.text.toString().toLowerCase())
+                || mutableList[i].specializ.contains(edTimKiem.text.toString().toLowerCase())
+                || mutableList[i].system.contains(edTimKiem.text.toString().toLowerCase())
+                    || mutableList[i].phone.contains(edTimKiem.text.toString().toLowerCase())
+                    || mutableList[i].yearOfBirth.contains(edTimKiem.text.toString().toLowerCase())){
                 list.add(mutableList[i])
             }
+
 
         }
         display(list)
@@ -81,6 +88,33 @@ class MainActivity : AppCompatActivity() {
         for (i in 0 until mutableList.size-1){
             for (j in 0 until mutableList.size-1-i){
                 if(mutableList[j].yearOfBirth > mutableList[j+1].yearOfBirth){
+                    var tmp = mutableList[j]
+                    mutableList[j] = mutableList[j+1]
+                    mutableList[j+1] = tmp
+
+                }
+            }
+        }
+        display(mutableList)
+    }
+
+    fun sortStudentWithPhone(mutableList: MutableList<Student>){
+        for (i in 0 until mutableList.size-1){
+            for (j in 0 until mutableList.size-1-i){
+                if(mutableList[j].phone > mutableList[j+1].phone){
+                    var tmp = mutableList[j]
+                    mutableList[j] = mutableList[j+1]
+                    mutableList[j+1] = tmp
+
+                }
+            }
+        }
+        display(mutableList)
+    }
+    fun sortStudentWithName(mutableList: MutableList<Student>){
+        for (i in 0 until mutableList.size-1){
+            for (j in 0 until mutableList.size-1-i){
+                if(mutableList[j].name > mutableList[j+1].name){
                     var tmp = mutableList[j]
                     mutableList[j] = mutableList[j+1]
                     mutableList[j+1] = tmp
@@ -127,7 +161,7 @@ class MainActivity : AppCompatActivity() {
                     student.specializ = edChuyenNganh.text.toString()
                     student.system = spHe.selectedItem.toString()
                     student.phone = phone
-                    student.yearOfBirth = edNamSinh.text.toString().toInt()
+                    student.yearOfBirth = edNamSinh.text.toString()
                     mutableList.set(i,student)
                 }
             }
@@ -141,16 +175,28 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this,"bạn chưa nhập số điện thoại muốn xóa",Toast.LENGTH_LONG).show()
             return
         }
+        
 
-        for (i in 0 until mutableList.size){
+        val dialog = AlertDialog.Builder(this).create()
+        dialog.setMessage("bạn có chắc chắn muốn xóa")
+        dialog.setButton(AlertDialog.BUTTON_POSITIVE,"Yes"){
+            dialog,
+            which -> for (i in 0 until mutableList.size){
             val phone: String =edSDT.text.toString()
             if (mutableList[i].phone == phone){
                 mutableList.removeAt(i)
-                    break
-                }
+                break
             }
-        edSDT.text.clear()
-        display(mutableList)
+        }
+            edSDT.text.clear()
+            display(mutableList)
+        }
+        dialog.setButton(AlertDialog.BUTTON_NEGATIVE,"No"){
+            dialog, which ->  dialog.dismiss()
+        }
+        dialog.show()
+
+
     }
 
     fun addStudent(mutableList: MutableList<Student>){
@@ -174,7 +220,7 @@ class MainActivity : AppCompatActivity() {
                 student.name = edTenSv.text.toString()
                 student.phone = edSDT.text.toString()
                 student.specializ = edChuyenNganh.text.toString()
-                student.yearOfBirth = edNamSinh.text.toString().toInt()
+                student.yearOfBirth = edNamSinh.text.toString()
                 student.system = spHe.selectedItem.toString()
                 mutableList.add(student)
                 display(mutableList)
@@ -185,7 +231,7 @@ class MainActivity : AppCompatActivity() {
                 student.name = edTenSv.text.toString()
                 student.phone = edSDT.text.toString()
                 student.specializ = edChuyenNganh.text.toString()
-                student.yearOfBirth = edNamSinh.text.toString().toInt()
+                student.yearOfBirth = edNamSinh.text.toString()
                 student.system = spHe.selectedItem.toString()
                 mutableList.add(student)
                 display(mutableList)
