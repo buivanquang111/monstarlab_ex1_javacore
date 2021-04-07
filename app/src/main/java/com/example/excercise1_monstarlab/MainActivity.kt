@@ -74,12 +74,10 @@ class MainActivity : AppCompatActivity() {
             if (mutableList[i].name.contains(edTimKiem.text.toString().toLowerCase())
                 || mutableList[i].specializ.contains(edTimKiem.text.toString().toLowerCase())
                 || mutableList[i].system.contains(edTimKiem.text.toString().toLowerCase())
-                    || mutableList[i].phone.contains(edTimKiem.text.toString().toLowerCase())
-                    || mutableList[i].yearOfBirth.contains(edTimKiem.text.toString().toLowerCase())){
+                || mutableList[i].phone.contains(edTimKiem.text.toString().toLowerCase())
+                || mutableList[i].yearOfBirth.contains(edTimKiem.text.toString().toLowerCase())){
                 list.add(mutableList[i])
             }
-
-
         }
         display(list)
     }
@@ -91,7 +89,6 @@ class MainActivity : AppCompatActivity() {
                     var tmp = mutableList[j]
                     mutableList[j] = mutableList[j+1]
                     mutableList[j+1] = tmp
-
                 }
             }
         }
@@ -105,7 +102,6 @@ class MainActivity : AppCompatActivity() {
                     var tmp = mutableList[j]
                     mutableList[j] = mutableList[j+1]
                     mutableList[j+1] = tmp
-
                 }
             }
         }
@@ -118,7 +114,6 @@ class MainActivity : AppCompatActivity() {
                     var tmp = mutableList[j]
                     mutableList[j] = mutableList[j+1]
                     mutableList[j+1] = tmp
-
                 }
             }
         }
